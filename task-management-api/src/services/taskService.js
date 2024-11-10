@@ -1,16 +1,18 @@
+const Task = require("../models/taskModel");
+
 // Temporary in-memory "database" for tasks
 const tasks = [];
-let currentId = "0";
+let currentId = "1";
 
 // Create a new task
 const createTask = ({ title, description, status = "pending", dueDate }) => {
-    const newTask = {
+    const newTask = new Task({
         id: `${parseInt(currentId++)}`,
         title,
         description,
         status,
         dueDate
-    };
+    });
 
     tasks.push(newTask);
     return newTask;
@@ -53,7 +55,7 @@ const deleteTask = (id) => {
 
 module.exports = {
     createTask,
-    getTasks,
+    getAllTasks,
     getTaskById,
     updateTask,
     deleteTask

@@ -20,7 +20,7 @@ const createTask = (req, res) => {
 
 // Get all tasks
 const getTasks = (req, res) => {
-    const tasks = taskService.getAllTasks);
+    const tasks = taskService.getAllTasks();
     res.json(tasks);
 };
 
