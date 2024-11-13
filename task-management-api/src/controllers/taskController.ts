@@ -25,7 +25,7 @@ class TaskController {
 
     async getTasks(req: Request, res: Response): Promise<Response> {
         try {
-            const tasks = TaskService.getAllTasks();
+            const tasks = await TaskService.getAllTasks();
             return res.status(200).json(tasks);
         } catch (error) {
             return res.status(500).json({ message: error.message });
@@ -34,7 +34,7 @@ class TaskController {
 
     async getTaskById(req: Request, res: Resoponse): Promise<Response> {
         try {
-            const task = TaskService.getTaskById(req.params.id);
+            const task = await TaskService.getTaskById(req.params.id);
             if (!task) {
                 return res.status(404).json({ message: 'Task not found' });
             }
@@ -46,7 +46,7 @@ class TaskController {
 
     async updateTask(req: Request, res: Resoponse): Promise<Response> {
         try {
-            const updatedTask = TaskService.updateTask(req.params.id, req.body);
+            const updatedTask = await TaskService.updateTask(req.params.id, req.body);
             if (!updatedTask) {
                 return res.status(404).json({ message: 'Task not found' });
             }
@@ -58,7 +58,7 @@ class TaskController {
 
     async deleteTask(req: Request, res: Resoponse): Promise<Response> {
         try {
-            const success = TaskService.deleteTask(req.params.id);
+            const success = await TaskService.deleteTask(req.params.id);
             if (!success) {
                 return res.status(404).json({ message: 'Task not found' });
             }

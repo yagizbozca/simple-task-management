@@ -1,65 +1,27 @@
-import TaskModel from '../models/taskModel';
+import { Task } from '../models/task';
+import { TaskModelMock } from '../mocks/taskModel.mock';
 
 class TaskService {
-    private tasks: any = [];
-    private currentId = 1;
+    constructor() {}
 
-    async createTask({ title: string, description = '', status = 'pending', dueDate: string }): Promise<any> {
-        return new Promise((resolve, reject) => {
-            const newTask = {
-                id: `${currentId++}`,
-                title,
-                description,
-                status,
-                dueDate
-            };
-
-            this.tasks.push(newTask);
-            resolve(newTask);
-        });
+    async createTask(task: Task): Promise<Task> {
+        return TaskModelMock.create(task);
     }
 
-    async getAllTasks(): Promise<any> {
-        return new Promise((resolve, reject) => {
-            resolve(this.tasks);
-        });
+    async getAllTasks(): Promise<Task[]> {
+        return TaskModelMock.findAll();
     }
 
-    async getTaskById(id: string): Promise<any> {
-        return new Promise((resolve, reject) => {
-            const task = this.tasks.find((task) => task.id === id);
-            resolve(task);
-        });
+    async getTaskById(id: string): Promise<Task | null> {
+        return TaskModelMock.findById(id);
     }
 
-    async updateTask(id: string, updates: any): Promise<any> {
-        return new Promise((resolve, reject) => {
-            const task = this.tasks.find((task) => task.id === id);
-
-            if (!task) {
-                reject({ message: 'Task not found' });
-            }
-
-            task.title = updates.title || task.title;
-            task.description = updates.description || task.description;
-            task.status = updates.status || task.status;
-            task.dueDate = updates.dueDate || task.dueDate;
-
-            resolve(task);
-        });
+    async updateTask(id: string, updates: Partial<Task>): Promise<Task | null> {
+        return TaskModelMock.update(id, updates);
     }
 
     async deleteTask(id: string): Promise<boolean> {
-        return new Promise((resolve, reject) => {
-            const taskIndex = this.tasks.findIndex((task) => id === task.id);
-
-            if (!taskIndex) {
-                reject({ message: 'Task not found' });
-            }
-
-            this.tasks.splice(taskIndex, 1);
-            resolve(true);
-        });
+        return TaskModelMock.delete(id);
     }
 }
 
