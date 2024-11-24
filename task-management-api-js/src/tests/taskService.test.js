@@ -1,4 +1,14 @@
 const taskService = require("../services/taskService");
+        return new Promise((resolve, reject) => {
+            const taskIndex = this.tasks.findIndex((task) => id === task.id);
+
+            if (!taskIndex) {
+                reject({ message: 'Task not found' });
+            }
+
+            this.tasks.splice(taskIndex, 1);
+            resolve(true);
+        });
 
 describe("Task Service", () => {
     // Reset the in-memory database before each test

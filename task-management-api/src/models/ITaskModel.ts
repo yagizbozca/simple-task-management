@@ -1,6 +1,6 @@
-import { Task } from './tasl';
+import { Task } from './task';
 
-export interface IUserModel {
+export interface ITaskModel {
     findAll(): Promise<Task[]>;
     findById(id: string): Promise<Task | null>;
     create(task: Task): Promise<Task>;

@@ -1,5 +1,6 @@
 import { ITaskModel } from '../models/ITaskModel';
-import { Task } from '../models/Task';
+import { Task } from '../models/task';
+import { v4 as uuidv4 } from 'uuid';
 
 class TaskModelMock implements ITaskModel {
     private tasks: Task[] = [
@@ -13,7 +14,6 @@ class TaskModelMock implements ITaskModel {
                 if (fail) {
                     reject({ message: 'DB error' });
                 }
-
                 resolve(this.tasks);
             }, 1500);
         });
@@ -58,4 +58,4 @@ class TaskModelMock implements ITaskModel {
     }
 }
 
-export default TaskModelMock;
+export default new TaskModelMock();

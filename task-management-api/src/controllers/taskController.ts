@@ -19,7 +19,7 @@ class TaskController {
             const newTask = await TaskService.createTask(req.body);
             return res.status(201).json(newTask);
         } catch (error) {
-            return res.status(500).json({ message: error.message });
+            return res.status(500).json({ message: 'There is an error' });
         }
     }
 
@@ -28,11 +28,11 @@ class TaskController {
             const tasks = await TaskService.getAllTasks();
             return res.status(200).json(tasks);
         } catch (error) {
-            return res.status(500).json({ message: error.message });
+            return res.status(500).json({ message: 'There is an error' });
         }
     }
 
-    async getTaskById(req: Request, res: Resoponse): Promise<Response> {
+    async getTaskById(req: Request, res: Response): Promise<Response> {
         try {
             const task = await TaskService.getTaskById(req.params.id);
             if (!task) {
@@ -40,11 +40,11 @@ class TaskController {
             }
             return res.status(200).json(task);
         } catch (error) {
-            return res.status(500).json({ message: error.message });
+            return res.status(500).json({ message: 'There is an error' });
         }
     }
 
-    async updateTask(req: Request, res: Resoponse): Promise<Response> {
+    async updateTask(req: Request, res: Response): Promise<Response> {
         try {
             const updatedTask = await TaskService.updateTask(req.params.id, req.body);
             if (!updatedTask) {
@@ -52,11 +52,11 @@ class TaskController {
             }
             return res.status(200).json(updatedTask);
         } catch (error) {
-            return res.status(500).json({ message: error.message });
+            return res.status(500).json({ message: 'There is an error' });
         }
     }
 
-    async deleteTask(req: Request, res: Resoponse): Promise<Response> {
+    async deleteTask(req: Request, res: Response): Promise<Response> {
         try {
             const success = await TaskService.deleteTask(req.params.id);
             if (!success) {
@@ -64,7 +64,7 @@ class TaskController {
             }
             return res.status(204).send();
         } catch (error) {
-            return res.status(500).json({ message: error.message });
+            return res.status(500).json({ message: 'There is an error' });
         }
     }
 }
