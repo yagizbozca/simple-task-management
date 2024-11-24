@@ -53,6 +53,7 @@ class TaskModelMock implements ITaskModel {
         return this.mockDBConnection().then((tasks: Task[]) => {
             const initialLength = tasks.length;
             tasks = tasks.filter(task => task.id !== id);
+            this.tasks = tasks;
             return tasks.length < initialLength;
         });
     }

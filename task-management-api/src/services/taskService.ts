@@ -3,7 +3,6 @@ import TaskModelMock from '../mocks/taskModel.mock';
 
 class TaskService {
     async createTask(task: Task): Promise<Task> {
-        console.log('Test');
         return TaskModelMock.create(task);
     }
 

@@ -7,10 +7,10 @@ router.post('/', (req: Request, res: Response) => TaskController.createTask(req,
 
 router.get('/', (req: Request, res: Response) => TaskController.getTasks(req, res));
 
-router.get('/:id', TaskController.getTaskById.bind);
+router.get('/:id', (req: Request, res: Response) => TaskController.getTaskById(req, res));
 
-router.put('/:id', TaskController.updateTask.bind);
+router.put('/:id', (req: Request, res: Response) => TaskController.updateTask(req, res));
 
-router.delete('/:id', TaskController.deleteTask.bind);
+router.delete('/:id', (req: Request, res: Response) => TaskController.deleteTask(req, res));
 
 export default router;
