@@ -2,6 +2,11 @@ import { Task } from '../models/task';
 import TaskModelMock from '../mocks/taskModel.mock';
 
 class TaskService {
+
+    constructor() {
+
+    }
+
     async createTask(task: Task): Promise<Task> {
         return TaskModelMock.create(task);
     }
