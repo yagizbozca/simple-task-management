@@ -2,7 +2,7 @@ export interface CreateTaskModel {
     title: string;
     description?: string;
     status: "pending" | "completed";
-    dueDate: Date;
+    dueDate: string;
 }
 
 export interface UpdateTaskModel {
@@ -10,5 +10,5 @@ export interface UpdateTaskModel {
     title?: string;
     description?: string;
     status?: "pending" | "completed";
-    dueDate?: Date;
+    dueDate?: string;
 }

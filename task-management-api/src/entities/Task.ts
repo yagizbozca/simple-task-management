@@ -3,6 +3,6 @@ export inteface Task {
     title: string;
     description?: string;
     status: "pending" | "completed";
-    dueDate: Date;
+    dueDate: string;
     createdAt: Date;
 }

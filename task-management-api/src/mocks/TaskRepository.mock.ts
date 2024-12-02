@@ -1,8 +1,8 @@
-import { ITaskModel } from '../models/ITaskModel';
-import { Task } from '../models/task';
+import { ITaskRepository } from "../repositories/ITaskRepository";
+import { Task } from "../entities/Task";
 import { v4 as uuidv4 } from 'uuid';
 
-class TaskModelMock implements ITaskModel {
+export class TaskRepositoryMock implements ITaskRepository {
     private tasks: Task[] = [
         { id: uuidv4(), title: 'Learn OOP', status: 'pending', dueDate: '01-01-2025' },
         { id: uuidv4(), title: 'Get bread', status: 'completed', dueDate: '12-11-2024' }
@@ -31,7 +31,7 @@ class TaskModelMock implements ITaskModel {
         });
     }
 
-    async create(taskData: Omit<Task, 'id'>): Promise<Task> {
+    async create(taskData: CreateTaskModel): Promise<Task> {
         return this.mockDBConnection().then((tasks: Task[]) => {
             const task: Task = { id: uuidv4(), ... taskData};
             tasks.push(task);
@@ -39,7 +39,7 @@ class TaskModelMock implements ITaskModel {
         });
     }
 
-    async update(id: string, updates: Partial<Task>): Promise<Task | null> {
+    async update(id: string, updates: UpdateTaskModel): Promise<Task | null> {
         return this.mockDBConnection().then((tasks: Task[]) => {
             const taskIndex = tasks.findIndex(task => task.id === id);
             if (taskIndex === -1) return null;
@@ -59,4 +59,3 @@ class TaskModelMock implements ITaskModel {
     }
 }
 
-export default new TaskModelMock();

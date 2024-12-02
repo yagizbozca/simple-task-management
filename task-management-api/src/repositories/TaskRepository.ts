@@ -1,4 +1,4 @@
-import { query } from "../database";
+import { query } from "../utils/database";
 import { Task } from "../entities/Task";
 
 export class TaskRepository {
