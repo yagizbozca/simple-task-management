@@ -1,4 +1,16 @@
 services:
+  application:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./task-management-api:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - postgres
+
   postgres:
     image: postgres:15
     container_name: postgres_container
@@ -11,5 +23,6 @@ services:
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
       - postgres_data:/var/lib/postgresql/data
+
 volumes:
   postgres_data:
