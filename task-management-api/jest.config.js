@@ -1,13 +1,15 @@
+import { defaults } from "jest-config";
+
 export default {
-    transform: {
-        "^.+\\.tsx?$": "ts-jest",
-    },
     testEnvironment: "node",
-    moduleFileExtensions: ["ts"],
+    clearMocks: true,
     extensionsToTreatAsEsm: [".ts"],
-    globals: {
-        "ts-jest": {
-            useESM: true
-        }
-    }
+    transform: {
+        "^.+\\.ts$": ["ts-jest", { useESM: true }],
+    },
+    roots: ["<rootDir>/src"],
+    moduleFileExtensions: [...defaults.moduleFileExtensions, "ts", "tsx"],
+    collectCoverage: false,
+    collectCoverageFrom: ["src/**/*.ts"],
+    coverageDirectory: "coverage",
 };

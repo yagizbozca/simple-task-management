@@ -1,7 +1,11 @@
+/* Uses parameterized queries to prevent SQL injection */
+
+import { ITaskRepository } from "./ITaskRepository";
 import { query } from "../utils/database";
 import { Task } from "../entities/Task";
+import { CreateTaskModel, UpdateTaskModel } from "../models/TaskModel";
 
-export class TaskRepository {
+export class TaskRepository implements ITaskRepository {
     async findAll(): Promise<Task[]> {
         const result = await query<Task[]>("SELECT * FROM tasks;");
         return result;
@@ -12,7 +16,7 @@ export class TaskRepository {
         return result[0] || null;
     }
 
-    async create(task: Partial<Omit<Task, "id" | "createdAt">>): Promise<Task> {
+    async create(task: CreateTaskModel): Promise<Task> {
         const requiredFields = ["title", "status", "dueDate"];
         const optionalFields = ["description"];
 
@@ -48,7 +52,7 @@ export class TaskRepository {
         return result[0];
     }
 
-    async update(id: number, task: Partial<Omit<Task, "id" | "createdAt">>): Promise<Task | null> {
+    async update(id: number, task: UpdateTaskModel): Promise<Task | null> {
         const fields: string[] = [];
         const values: any[] = [];
         let counter = 1;

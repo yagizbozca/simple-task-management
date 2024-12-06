@@ -9,7 +9,7 @@ export class TaskService {
         this.taskRepository = taskRepository;
     }
 
-    async createTask(task: Task): Promise<Task> {
+    async createTask(task: CreateTaskModel): Promise<Task> {
         return this.taskRepository.create(task);
     }
 
@@ -21,7 +21,7 @@ export class TaskService {
         return this.taskRepository.findById(id);
     }
 
-    async updateTask(id: string, updates: Partial<Task>): Promise<Task | null> {
+    async updateTask(id: string, updates: UpdateTaskModel): Promise<Task | null> {
         return this.taskRepository.update(id, updates);
     }
 

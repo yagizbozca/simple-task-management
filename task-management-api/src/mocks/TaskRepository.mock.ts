@@ -1,11 +1,12 @@
 import { ITaskRepository } from "../repositories/ITaskRepository";
 import { Task } from "../entities/Task";
+import { CreateTaskModel, UpdateTaskModel } from "../models/TaskModel";
 import { v4 as uuidv4 } from 'uuid';
 
 export class TaskRepositoryMock implements ITaskRepository {
     private tasks: Task[] = [
-        { id: uuidv4(), title: 'Learn OOP', status: 'pending', dueDate: '01-01-2025' },
-        { id: uuidv4(), title: 'Get bread', status: 'completed', dueDate: '12-11-2024' }
+        // { id: uuidv4(), title: 'Learn OOP', status: 'pending', dueDate: '01-01-2025' },
+        // { id: uuidv4(), title: 'Get bread', status: 'completed', dueDate: '12-11-2024' }
     ];
 
     private mockDBConnection(fail = false): Promise<Task[]> {
@@ -33,7 +34,7 @@ export class TaskRepositoryMock implements ITaskRepository {
 
     async create(taskData: CreateTaskModel): Promise<Task> {
         return this.mockDBConnection().then((tasks: Task[]) => {
-            const task: Task = { id: uuidv4(), ... taskData};
+            const task: Task = { id: uuidv4(), createdAt: new Date, ...taskData};
             tasks.push(task);
             return task;
         });

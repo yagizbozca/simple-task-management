@@ -1,8 +1,10 @@
-export inteface Task {
+import { TaskStatus } from "../enums/TaskStatus.enum";
+
+export interface Task {
     id: string;
     title: string;
     description?: string;
-    status: "pending" | "completed";
+    status: TaskStatus;
     dueDate: string;
     createdAt: Date;
 }
