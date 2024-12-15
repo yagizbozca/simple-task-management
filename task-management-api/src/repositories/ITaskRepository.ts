@@ -1,4 +1,4 @@
-import { CreateTaskModel, UpdateTaskModel } from "..models/TaskModel";
+import { CreateTaskModel, UpdateTaskModel } from "../models/TaskModel";
 import { Task } from "../entities/Task";
 
 export interface ITaskRepository {
